@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <dlfcn.h>
-#include <mysql/mysql.h>
+#include <mysql.h>
 
 #define DB_HOST "localhost"
 #define DB_USERNAME "root"
