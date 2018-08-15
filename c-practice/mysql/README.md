@@ -1,12 +1,13 @@
 ## mysql
 
-### in cygwin
+### in Archlinux
 install `libmysqlclient`
 ```
-apt-cyg install libmysqlclient-devel libmysqlclient18
+sudo pacman -S base-devel gcc 
+sudo pacman -S mariadb
 ```
 
 编译
 ```
-gcc main.c -I /usr/include/mysql/ -L /lib/ -lmysqlclient
+gcc main.c -I /usr/include/mysql/ -L /lib/ -l libmysqlclient
 ```
