@@ -1,11 +1,15 @@
 ## gcc
 
+参考： http://www.cnblogs.com/ggjucheng/archive/2011/12/14/2287738.html#_Toc311642845
+
 1. 简单编译
 ```
 gcc main.c -o main
 ```
 
 上述编译过程是分为四个阶段进行的，即预处理(也称预编译，Preprocessing)、编译(Compilation)、汇编 (Assembly)和连接(Linking)
+
+2. 分步编译 
 
 2.1. 预处理
 ```
