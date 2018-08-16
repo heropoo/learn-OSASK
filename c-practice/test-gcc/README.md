@@ -48,4 +48,3 @@ gcc -c test1.c -o test1.o
 gcc -c test2.c -o test2.o
 gcc test1.o test2.o -o test
 ```
-
