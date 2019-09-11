@@ -39,7 +39,9 @@
 		DB		0
 
 		; RESB	0x1fe-$			; 填写0x00直到0x01FE
-		RESB	$ - $$			; nasm 用着个
+        ; 原书中使用下面指令，但这个在nasm中不通过，故使用times
+        times 0x1fe - ($ - $$) DB 0
+        ;times 510 - ($-$$) DB 0
 
 		DB		0x55, 0xaa
 
