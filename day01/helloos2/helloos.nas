@@ -34,7 +34,7 @@
 ; 信息显示部分
 
 		DB		0x0a, 0x0a		; 2个换行
-		DB		"hello, world. Yingying, I love you!"
+		DB		"Hello, world. Yingying, I love you!"
 		DB		0x0a			; 换行
 		DB		0
 

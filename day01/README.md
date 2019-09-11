@@ -5,6 +5,9 @@ DB      ;"data byte"缩写，就是写入一个字节的指令
 RESB    ;"reserve byte"的缩写，"RESB 10"就是空出10个字节
 DW DD   ;"data word","data double-word"的缩写 前者16位2字节，后者32位4字节
 RESB 0x1fe-$    ;填写0x00直到0x01FE
+        ;但这个在nasm中不通过，故使用times
+        times 0x1fe - ($ - $$) DB 0
+        ;times 510 - ($-$$) DB 0
 ```
 
 ### FAT12格式
