@@ -5,7 +5,7 @@
 
 ; 以下的记述用于标准的FAT12格式的软盘
 
-		JMP		entry
+	JMP		entry
         DB		0x90
         DB		"HELLOTAT"		; 启动区的名称可以是任意的字符串（8个字节）
         DW		512				; 每个扇区（sector）的大小（必须为512字节）
@@ -55,6 +55,7 @@ msg:
         DB		0x0a			; 换行
         DB		0
 
-        RESB	0x7dfe-$		; 填写0x00直到0x01FE
+        ;RESB	0x7dfe-$		; 填写0x00直到0x01FE
+	times 0x1fe - ($ - $$) DB 0
 
         DB		0x55, 0xaa
