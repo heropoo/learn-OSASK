@@ -1,38 +1,14 @@
-# 默认动作
+all:img
 
-default :
-	..\..\z_tools\make.exe img
+boot:
+	nasm ipl.nas -o ipl.bin -l ipl.lst
 
-# 文件生成规则
+img:boot
+	dd if=ipl.bin of=helloos.img count=1 bs=512
+	dd if=/dev/zero of=helloos.img bs=512 seek=1 skip=1 count=2879
 
-ipl.bin : ipl.nas Makefile
-	..\..\z_tools\nask.exe ipl.nas ipl.bin ipl.lst
-
-helloos.img : ipl.bin Makefile
-	..\..\z_tools\edimg.exe   imgin:..\..\z_tools\fdimg0at.tek \
-		wbinimg src:ipl.bin len:512 from:0 to:0   imgout:helloos.img
-
-# 指令
-
-asm :
-	..\..\z_tools\make.exe -r ipl.bin
-
-img :
-	..\..\z_tools\make.exe -r helloos.img
-
-run :
-	..\..\z_tools\make.exe img
-	copy helloos.img ..\..\z_tools\qemu\fdimage0.bin
-	..\..\z_tools\make.exe -C ..\..\z_tools\qemu
-
-install :
-	..\..\z_tools\make.exe img
-	..\..\z_tools\imgtol.com w a: helloos.img
+run:img
+	qemu-system-i386 -drive file=helloos.img,format=raw,if=floppy
 
 clean :
-	-del ipl.bin
-	-del ipl.lst
-
-src_only :
-	..\..\z_tools\make.exe clean
-	-del helloos.img
+	rm -rf helloos.img ipl.bin ipl.lst
