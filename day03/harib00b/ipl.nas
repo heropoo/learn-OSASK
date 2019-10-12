@@ -81,6 +81,7 @@ msg:
 		DB		0x0a			; ‰üs
 		DB		0
 
-		RESB	0x7dfe-$		; 0x7dfe‚Ü‚Å‚ğ0x00‚Å–„‚ß‚é–½—ß
+		;RESB	0x7dfe-$		; 0x7dfe‚Ü‚Å‚ğ0x00‚Å–„‚ß‚é–½—ß
+        times 0x1fe - ($ - $$) DB 0
 
 		DB		0x55, 0xaa
