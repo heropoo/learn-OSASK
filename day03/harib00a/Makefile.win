@@ -1,10 +1,10 @@
 TOOLPATH = ..\..\z_tools
-MAKE     = make
-NASK     = nasm
+MAKE     = $(TOOLPATH)\make.exe -r
+NASK     = $(TOOLPATH)\nask.exe
 EDIMG    = $(TOOLPATH)\edimg.exe
 IMGTOL   = $(TOOLPATH)\imgtol.com
-COPY     = cp
-DEL      = rm -rf 
+COPY     = copy
+DEL      = del
 
 # 默认动作
 
@@ -14,11 +14,11 @@ default :
 # 文件生成规则
 
 ipl.bin : ipl.nas Makefile
-	$(NASK) ipl.nas -o ipl.bin -l ipl.lst
+	$(NASK) ipl.nas ipl.bin ipl.lst
 
 haribote.img : ipl.bin Makefile
-	dd if=ipl.bin of=haribote.img count=1 bs=512
-	dd if=/dev/zero of=haribote.img bs=512 seek=1 skip=1 count=2879
+	$(EDIMG)   imgin:$(TOOLPATH)\fdimg0at.tek \
+		wbinimg src:ipl.bin len:512 from:0 to:0   imgout:haribote.img
 
 # 指令
 
@@ -30,7 +30,12 @@ img :
 
 run :
 	$(MAKE) img
-	qemu-system-i386 -drive file=haribote.img,format=raw,if=floppy
+	$(COPY) haribote.img $(TOOLPATH)\qemu\fdimage0.bin
+	$(MAKE) -C $(TOOLPATH)\qemu
+
+install :
+	$(MAKE) img
+	$(IMGTOL) w a: haribote.img
 
 clean :
 	-$(DEL) ipl.bin
